@@ -1,0 +1,33 @@
+import mysql.connector
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#Soal 2.1
+# Connect to MySqL DB
+dbku = mysql.connector.connect(
+  host="localhost",
+  user="shendy",
+  passwd="2991Iluj92",
+  database="world"
+)
+
+# Read DB
+df = pd.read_sql('select country.Name, country.Population from country where country.Region = "Southeast Asia" order by Name asc', con = dbku)
+# print(df)
+plt.style.use('seaborn')
+
+# Customs Colors
+warna = ['lightblue', 'orange', 'green', 'red', 'purple', 'saddlebrown', 'pink', 'grey', 'olive', 'cyan', 'blue']
+plt.figure('Figure 1: Populasi Negara ASEAN ', figsize=(16, 9))
+
+# Bar Chart
+plt.bar(df.Name, df.Population, color=warna)
+plt.title('Populasi Negara ASEAN')
+plt.xlabel('Negara')
+plt.ylabel('Populasi (x100jt jiwa)')
+plt.xticks(rotation = 45)
+
+for x, y in enumerate(df.Population):
+    plt.text(x-.3, y, str(y))
+plt.show()
