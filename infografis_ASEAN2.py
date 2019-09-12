@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 dbku = mysql.connector.connect(
   host="localhost",
   user="shendy",
-  passwd="2991Iluj92",
+  passwd="password",
   database="world"
 )
 
